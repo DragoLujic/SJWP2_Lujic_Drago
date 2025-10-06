@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Kuća i drvo</title>
+  <style>
+    table, td{
+      border: 1px solid black;
+    }
+  </style>
 </head>
 <body>
   <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
 
-   
     <rect x="0" y="0" width="600" height="400" fill="skyblue" />
    
     <rect x="0" y="300" width="600" height="100" fill="olivedrab" />
@@ -36,6 +40,43 @@
     
     <rect x="95" y="100" width="30" height="200" fill="brown" />
     <circle cx="110" cy="100" r="70" fill="darkgreen" />
+
   </svg>
+  <br>
+
+<h2>Tablice u HTML-u</h2>
+
+<table>
+
+  <tr>
+    <td>Firma</td>
+    <td>Contact</td>
+    <td>Zemlja</td>
+  </tr>
+
+  <tr>
+    <td>Đuro Đaković</td>
+    <td>Ivan</td>
+    <td>Hrvatska</td>
+  </tr>
+
+  <tr>
+    <td>Stolarija Lujić</td>
+    <td>Drago</td>
+    <td>Gundinci</td>
+  </tr>
+</table>
+
+<h2>Forms u HTML-u</h2>
+<form action="#" method="get">
+  
+<label for="ime">Ime:</label><br>
+<input type="text" id="ime" required> <br>
+<label for="prezime">Prezime:</label><br>
+<input type="text" id="prezime"> <br> <br>
+<input type="submit" value="Pošalji">
+
+</form>
+
 </body>
 </html>
