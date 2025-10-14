@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skriptni jezici</title>
+    <style> 
+
+    body{
+      background:#C2F8F6; 
+      color:#333;
+    }
+
+     h1{
+        font-size:2.3em; 
+        font-weight: bold;
+    }
+
+    .brat{
+      margin:7px; 
+      color: rgb(86,86,86);
+      padding:12px;
+      border-radius:6px;
+    }
+
+    .slika{
+        width:480px; height:220px; 
+    }
+
+    table{
+        background:rgba(255,255,255,0.8);
+    }
+    th, td{
+        border:1px solid #bbb; padding:8px; text-align:left
+    }
+    th{
+        background: rgb(224, 220, 220);
+    }
+
+    form.contact button{
+      width:50%;
+      padding:12px;
+      border-radius:3px;
+      border:0;
+      background:#C2F8F6; 
+      border: 1px solid black;
+    }
+
+    form.contact input{
+      width:50%;
+      box-sizing:border-box;
+      padding:10px;
+      margin:8px 0;
+      border-radius:3px; 
+      border:1px solid #999;
+    }
+
+    form.contact textarea{
+      width:50%;
+      box-sizing:border-box;
+      padding:10px;
+      border-radius:3px; 
+      border:1px solid #999;
+    }
+
+    
+
+    </style>
+</head>
+<body>
+    
+<nav>
+    <a href="#">Početna</a>
+    <a href="#">O nama</a>
+    <a href="#">Kontakt</a>
+
+    <h1>HTML, CSS, Canvas i SVG</h1>
+
+ <div class="brat">
+
+    <p><em>Canvas</em> je HTML5 element koji, pomoću JavaScript-a, omogućava dinamičko iscrtavanje različitih oblika, dodavanje slika, kreiranje animacija na web stranici i sl.</p>
+
+    <p>Na platnu (canvas-u) to ne radimo korištenjem novog jezika (kao što je to slučaj kod SVG) ili korištenjem Flasha. Najčešće uporabe platna su:</p>
+    <ul>
+      <li>crtanje grafova,</li>
+      <li>animiranje, igre i</li>
+      <li>kompozicija slike.</li>
+    </ul>
+    
+    <hr>
+
+    <p><strong>SVG</strong> <em>(Scalable Vector Graphics)</em> grafika ne gubi kvalitetu prilikom zumiranja ili resize-a. Svi crteži mogu biti interaktivni i dinamički. 
+      Svaki element i atribut SVG datoteke može biti animiran. Animacije mogu biti definirane i pokrenute interaktivno ili pomoću skripti. SVG integrira druge W3C standarde kao što su DOM, XSL …</p>
+
+    <hr>
+    <h3>Usporedba SVG-a i Canvasa</h3>
+
+      <table>
+        <tr>
+            <th>SVG</th>
+            <th>HTML Canvas</th>
+        </tr>
+        <tr>
+            <td>SVG ima bolju skalabilnost, tako da može imati bolje slike s velikom kvalitetom na bilo kojoj rezoluciji</td>
+            <td>Canvas ima lošu skalabilnost. Nije prikladan za rad s velikim rezolucijama</td>
+        </tr>
+        <tr>
+            <td>SVG daje bolje performanse sa manjim brojem objekata ili većom površinom</td>
+            <td>Canvas daje bolje performanse za rad sa manjim površinama ili većim brojem objekata</td>
+        </tr>
+        <tr>
+            <td>SVG se može modificirati uz pomoć skripte i CSS-a</td>
+            <td>Canvas se može modificirati samo uz pomoć skripte</td>
+        </tr>
+        <tr>
+            <td>SVG je baziran na vektorima i sastavljen je od oblika</td>
+            <td>Canvas je baziran na pixelima</td>
+        </tr>
+    </table>
+  </div>
+    <img class="slika" src="Snimka zaslona 2025-10-14 105603.png" alt="Primjer slike" width="480" height="220">
+    <br>
+    <br>
+
+<svg width="600" height="600" style="border: 5px solid black">
+
+  <rect width="600" height="600" fill="lightblue"></rect>
+  <rect y="450" width="600" height="150" fill="darkblue"></rect>
+  <rect x="150" y="405" width="225" height="75" fill="brown"></rect>
+  <polygon points="180,390 345,390 267,180" fill="white"></polygon>
+  <rect x="255" y="135" height="270" width="22" fill="black"></rect>
+  <circle cx="480" cy="105" r="75" fill="yellow"></circle>
+  <polygon points="187,165 247,142 247,187" fill="green"></polygon>
+  
+</svg>
+
+<canvas id="myCanvas1" width="600" height="600" style="border: 5px solid black; background-color: lightblue"></canvas>
+<script>
+    let c = document.getElementById("myCanvas1");
+    let context = c.getContext("2d");
+
+    context.beginPath();
+    context.rect(0, 450, 600, 300);
+    context.stroke();
+    context.fillStyle = "darkblue";
+    context.fill();
+ 
+    context.beginPath();
+    context.rect(150, 390, 195, 75);
+    context.fillStyle = "brown";
+    context.fill();
+
+    
+    context.beginPath();
+    context.moveTo(165, 375);   
+    context.lineTo(330, 375);   
+    context.lineTo(252, 180);   
+    context.lineTo(165, 375);
+    context.fillStyle = "white";
+    context.fill();
+
+    context.beginPath();
+    context.rect(240, 135, 22.5, 255);
+    context.fillStyle = "black";
+    context.fill();
+
+    context.beginPath();
+    context.arc(495, 105, 75, 0, 2 * Math.PI);
+    context.fillStyle = "yellow";
+    context.fill();
+
+    context.beginPath();
+    context.moveTo(172.5, 165);
+    context.lineTo(232.5, 142.5);
+    context.lineTo(232.5, 187.5);
+    context.lineTo(172.5, 165);
+    context.fillStyle = "green";
+    context.fill();
+</script>
+
+
+  <form class="contact">
+    <h3>Kontakt</h3>
+    <label for="name">Ime</label><br>
+    <input id="name" name="name" type="text" placeholder="Vaše ime" required>
+<br>
+    <label for="email">Email</label><br>
+    <input id="email" name="email" type="email" placeholder="Vaš email" required>
+<br>
+    <label for="message">Poruka</label><br>
+<br>
+    <textarea id="message" name="message" rows="6" placeholder="Upišite poruku" required></textarea><br><br>
+    <button type="submit">Pošalji</button><br>
+  </form>
+
+</nav>
+
+</body>
+</html>

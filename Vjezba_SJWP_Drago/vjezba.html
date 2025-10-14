@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SVG Brod</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <link href="../css/styles.css" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -15,7 +19,24 @@
     }
   </style>
 </head>
-<body>
+<body id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="#page-top">SVG Brod</a>
+      <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Zadaće</a></li>
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">O meni</a></li>
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Kontaktiraj me</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <svg width="800" height="400" style="border:1px solid black; background:white;">
    
@@ -25,15 +46,15 @@
   
     <polygon points="270,190 500,190 455,250 220,250" fill="black" />
 
-    <polygon points="470,39" fill="black" />
+    <line x1="470" y1="190" x2="470" y2="39" stroke="black" stroke-width="5" />
 
     <rect x="540" y="190" width="160" height="60" fill="black" />
 
     <rect x="640" y="150" width="45" height="45" fill="black" />
 
     <rect x="560" y="205" width="40" height="25" fill="white" />
-    
-    <polygon points="" fill="black"
+
+    <polygon points="220,250 455,250 500,190 270,190" fill="white" />
 
     <rect x="180" y="280" width="22" height="15" fill="white" />
     <rect x="230" y="280" width="22" height="15" fill="white" />
