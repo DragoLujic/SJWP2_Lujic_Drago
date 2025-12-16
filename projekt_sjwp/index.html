@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <title>Elektronički alati</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Elektronički alati</h1>
+
+
+<section class="blok">
+  <h2>Ohmov zakon</h2>
+  <div class="grid">
+    <div>
+      <label>Unesi otpor (Ω)</label>
+      <input type="number" id="ohmR" placeholder="R1">
+
+      <label>Unesi napon (V)</label>
+      <input type="number" id="ohmU" placeholder="U1">
+
+      <button onclick="izracunajStruju()">Izračunaj struju</button>
+
+      <h4>Struja</h4>
+      <p id="ohmI">I = </p>
+    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/UIR.png" alt="Ohmov zakon shema">
+  </div>
+</section>
+
+
+<section class="blok">
+  <h2>Djelilo napona</h2>
+  <div class="grid">
+    <div>
+      <label>R1 (Ω)</label>
+      <input type="number" id="r1" placeholder="R1">
+
+      <label>R2 (Ω)</label>
+      <input type="number" id="r2" placeholder="R2">
+
+      <label>Ulazni napon Uul (V)</label>
+      <input type="number" id="uul" placeholder="Uᵤ">
+
+      <button onclick="izracunajUiz()">Izračunaj Uiz</button>
+      <p id="uiz">Uiz = </p>
+    </div>
+    <img src="https://www.allaboutcircuits.com/uploads/thumbnails/voltage-divider-main-circuit.png" alt="Djelilo napona shema">
+  </div>
+</section>
+
+
+<section class="blok">
+  <h2>Serijsko spajanje otpornika</h2>
+  <div class="grid">
+    <div>
+      <input type="number" id="sr1" placeholder="R1">
+      <input type="number" id="sr2" placeholder="R2">
+      <input type="number" id="sr3" placeholder="R3">
+      <button onclick="serijskiOtp()">Izračunaj R</button>
+      <p id="rs">R = </p>
+    </div>
+    <img src="data:image/png;base64,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" alt="Serijski otpornici">
+  </div>
+</section>
+
+
+<section class="blok">
+  <h2>Paralelno spajanje otpornika</h2>
+  <div class="grid">
+    <div>
+      <input type="number" id="pr1" placeholder="R1">
+      <input type="number" id="pr2" placeholder="R2">
+      <input type="number" id="pr3" placeholder="R3">
+      <button onclick="paralelniOtp()">Izračunaj R</button>
+      <p id="rp">R = </p>
+    </div>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAAC0CAMAAAB4+cOfAAAAdVBMVEX///8AAADX19eRkZH5+flTU1Po6Oi5ubkbGxv8/PyDg4N5eXnx8fHs7Oybm5ulpaUVFRWKiorAwMDR0dGnp6fIyMizs7MzMzNJSUltbW1fX19YWFiYmJguLi7e3t49PT07OztlZWURERFycnIiIiJGRkZ9fX3kXOiEAAAHtUlEQVR4nO2d24KqIBRAocyiMEudLlPZdP3/Tzxgc+YclY04XqDa62Ee1EZcbi4iICEIgiAIgiAIgiAIYh1mOwHOEpx820lwk4hi0ChZLmynwFFGM9spcBSa2E6Bm/h0IKsmLGeKYNkLsJwIObOhZzsdzrETZe8sXZ5sp8M5RNkr8pK/tp0O1/AuPmOM7PfFHW9e8ojLl17icsB4QcAbYeFqWkV6GSgyEqcN6f9SWsej2+m9eIc53YVzgD2044fwMLFyKe3ipWk6KNbXnJaKnR9Y6lfllN3LPoF5dAju28isstL+fPQKYsQDQbkO0ojhdMX4lip+9I+XEOOHikvUiEmpz0hItY3lZxOjvMs+vSalXRwWsxI1jje5aE9kKkYbdv2hTkUgSoxrsfMBjBhG7nR6On+yl8pKYxVJ1u6YhLmNKzhijrv97ezp28Y7GinPVeKj/Yv8DXVaaJAYTseEycqcBQFoZ2d6Fn2O7I3FLR2UiLIUHsa5jTEoRpS9hHyOCDmNDkvIzO6sOFGZlPbcsQrdyMVOsTHItBQ2wrVSIuujISVMNPLAhr9pGdOrGKZsmGQsRoqNflmLTszsKLyPRdgwxp9MjDfmdcQEqkYsXCt5nqiQGJe10qgs9BsXxTAS0QDYpxSjRPdI8DgNI9MlGJouiiFkf4X2tCmGDO8ELM3cFDMCe3BbFEPYbnRcD6AkOCnmDL5DMxfD6bxJEky7HXoVE9AY2lVHTDPOZqfpVUxEwW6kGllpO2vE3ew0vYrZH8BdxmL6eujtVYwse+u0Y1Q07Q4w/XmvYmgI7jLPSj3Rp5hs/ALAW4vRRfFbi9GVD28tBiMGYhmBu4QYN3qfM1g3YsAcs6VfkXI3I5ORK/3yEpEUeu8xQRfRIl8royaiFOyMtIJPD2nb/3O5HarZH7OHlaNiz0Rsd2h8BiNrcQuBy1ADlxI/3H75dOe5FDG1U7+uDvjNgXhKRBkjmCSKXQFdpA5lJUamlN49rr4O1aV9HY3EAFykFvXvlW8JbELrJehwqz7mBvZfns4JI+o3qO61Ywy7J74xEXMEIyb26r0+sUnNdkwzMRpQDACKAXhyMWyyqa6V1r8ZzG0uhnG/GdA7vzz1xVRy+KrzL7+pETGrXzYg/7I0OstTilkmIUSS7YL3h/PK93UPnlIM/HgnGqsVv65+kfmgnhjvbJD+7sUMoIIulVnlonXTkRiDhrJRVJVQimHKzhtNxKyoH0SakePEqphFa2LStWqEoEbM9Cj+XLWl60uI8SndlNVoxBzFRcdU2zViLKbWs1KHYlT/OHt/fyuqGYNiPHpJLiIn6ZpaXUXMZ/UxJgV0icV5NyrzaHgc8xu/QDEpPY3EdWt7vDx6UJ2pyK7ecFZOt5XHmERVmfV1ouC7SZbbdl2AYlaUkTnlMmLAmsmjZ9WZSixqZSVOqye1/kqM+h4/hsLMCxcJZyVZ9mZjcAZrcHCRp6+0KtOkpjsxylT4Dy2FfXDhe1zK088Ju5TnmP5L3tDokvUzEoqYimmp99YvRYsEEsM8uhJnPp7En0Qrpn24QZHkGcgzxBPFRdkMLEZOE2S+XI7HRTEmBbQhMpxrtHzZ9yIZrP+ICQxqd681MUCG1D1EPn4nxMyh3uWuIqZPMYSHqlq3Ugxh18ME6mp8CTFj5VSJajE6uspK08pjTOQZMv1Sbe2nB68eZmLqvarScFT+p/g+bcIdnJjSgJ7FVMwtd4h+s1LaqDDplcAgg3IDeWaIstehUVZafIMnMN5a6TaVY058sIPXJYIexbCs7A1F5f8EYvqMGEaoqD+iQWutoi7xDVpHrWUln8pBVvGTiKmeXaZb+KYOMgOx5xEDzx/5S8OpeXkyMU9RxvQshsThJkYxCsJ5OHwRMUGrYp6E1GCNXZMC+uVAMQAoBgDFAJiIGRgU0J3AfXvVV+yymDm4Bkv3xAZ9atbEhFbFOBwxdsVgxCgxiRiTYzrBppgPg4h5UzHVL2VQDHjMW4qpzkomx3SCTTGRQcRE7yhmrB9cnGEirxNQDID7Yt4yK1VHg4m8TrApZmVw0W8qpnolbRQDgGIAUEyDYzrhR4yFHs4EXl71B6tivNV4PLZgJtGsffgXq2KyiTwWzu18xEgxNr4sZSam+phOsCumOislhfnivxl4WfMnj8NtigkNRt4mtkbnui/mc3b5bynqy2xZoLgOxSoq8FGg9GGSoMB34h5iwCWyOsQkGpKGcyAaEIArrRemyF43eW6nbZ5LcaXx0s1NcmyrxTD5qY0chYVwUr8YAHGBj8KXjlaFzx+Gw2Iy5eSJ5ehbzHl6P33m2azzHNq/KQ6P7k/azEpce3P94s2N7T2NVGOz8HUaFAOAYgBQDACKAUAxADa7HZxGimHRR2SpZ9VdbPb5Og2KAUAxACgGAMUAoBgAFAOAYgBQDACKAUAxACgGAMUAoBgAFAOAYgDm1LedBDeJ9w59Hg9BkNeFPc26gr0RyQGjzE+eYVmrXrlmq9ENKYrJwx9DjD9nKCZP/Gj72prf7C7hQv7lBoOR3wmRe07ZJ2siWvW5sjeDkWu2CNTexkBfp+F0LFswt9aW5n4VeDaxObY1ycNhNnQczw2/hvNWBDNKNxF6KcH++4v8DzpBEAR5b/4AvwN/+8PV4TgAAAAASUVORK5CYII=" alt="Paralelni otpornici">
+  </div>
+</section>
+
+
+<section class="blok">
+  <h2>Serijsko spajanje kapaciteta</h2>
+  <div class="grid">
+    <div>
+      <input type="number" id="cs1" placeholder="C1">
+      <input type="number" id="cs2" placeholder="C2">
+      <input type="number" id="cs3" placeholder="C3">
+      <button onclick="serijskiC()">Izračunaj C</button>
+      <p id="cs">C = </p>
+    </div>
+    <img src="https://edutorij-admin-api.carnet.hr/storage/extracted/b11cdcfa-bab1-4778-b12e-14d7386bf96b/img/12696-0-serijski-jpg-1533200481969.jpg" alt="Serijski kapaciteti">
+  </div>
+</section>
+
+
+<section class="blok">
+  <h2>Paralelno spajanje kapaciteta</h2>
+  <div class="grid">
+    <div>
+      <input type="number" id="cp1" placeholder="C1">
+      <input type="number" id="cp2" placeholder="C2">
+      <input type="number" id="cp3" placeholder="C3">
+      <button onclick="paralelniC()">Izračunaj C</button>
+      <p id="cp">C = </p>
+    </div>
+    <img src="https://edutorij-admin-api.carnet.hr/storage/extracted/b11cdcfa-bab1-4778-b12e-14d7386bf96b/img/10001-0-spajanje-jpg-1533200481969.jpg" alt="Paralelni kapaciteti">
+  </div>
+</section>
+
+
+<section class="blok">
+  <h2>Serijsko spajanje zavojnica</h2>
+  <div class="grid">
+    <div>
+      <input type="number" id="ls1" placeholder="L1">
+      <input type="number" id="ls2" placeholder="L2">
+      <input type="number" id="ls3" placeholder="L3">
+      <button onclick="serijskiL()">Izračunaj L</button>
+      <p id="ls">L = </p>
+    </div>
+    <img src="https://edutorij-admin-api.carnet.hr/storage/extracted/654190/img/15327-0-zavojnic-jpg-1533200483759.jpg" alt="Serijske zavojnice">
+  </div>
+</section>
+
+
+<section class="blok">
+  <h2>Paralelno spajanje zavojnica</h2>
+  <div class="grid">
+    <div>
+      <input type="number" id="lp1" placeholder="L1">
+      <input type="number" id="lp2" placeholder="L2">
+      <input type="number" id="lp3" placeholder="L3">
+      <button onclick="paralelniL()">Izračunaj L</button>
+      <p id="lp">L = </p>
+    </div>
+    <img src="data:image/jpeg;base64,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" alt="Paralelne zavojnice">
+  </div>
+</section>
+
+
+<section class="blok">
+  <h2>Induktivitet zračnog svitka</h2>
+  <div class="grid">
+    <div>
+      <input type="number" id="z" placeholder="z">
+      <input type="number" id="s" placeholder="S">
+      <input type="number" id="l" placeholder="l">
+      <button onclick="izracunajLz()">Izračunaj L</button>
+      <p id="lz">L = </p>
+    </div>
+    <img src="Snimka zaslona 2025-12-16 145833.png" alt="Zračni svitak">
+  </div>
+</section>
+
+
+<section class="blok">
+  <h2>Induktivni otpor</h2>
+  <div class="grid">
+    <div>
+      <input type="number" id="w" placeholder="ω">
+      <input type="number" id="lin" placeholder="L">
+      <button onclick="izracunajXl()">Izračunaj Xl</button>
+      <p id="xl">Xₗ = </p>
+    </div>
+    <img src="https://cmds-test.vedantu.com/prod/question-sets/97ec8cac-fb3e-4aa1-a923-6d70e1795c103843125364967102020.png" alt="Induktivni otpor">
+  </div>
+</section>
+
+
+<section class="blok">
+  <h2>Kapacitivni otpor</h2>
+  <div class="grid">
+    <div>
+      <input type="number" id="wc" placeholder="ω">
+      <input type="number" id="c" placeholder="C">
+      <button onclick="izracunajXc()">Izračunaj Xc</button>
+      <p id="xc">Xc = </p>
+    </div>
+    <img src="Snimka zaslona 2025-12-16 150505.png" alt="Kapacitivni otpor">
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
