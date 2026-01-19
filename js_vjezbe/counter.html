@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Counter</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #6fa8dc;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .counter-card {
+            background: #e6392f;
+            width: 260px;
+            height: 360px;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .counter-box {
+            border: 2px solid white;
+            width: 160px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .number {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 25px;
+        }
+
+        button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            background: white;
+            color: #e6392f;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #f1f1f1;
+        }
+
+        .difficulty {
+            font-size: 12px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="counter-card">
+    <div class="title">COUNTER</div>
+
+    <div class="counter-box">
+        <div class="number" id="count">0</div>
+        <div class="buttons">
+            <button onclick="decrease()">−</button>
+            <button onclick="increase()">+</button>
+        </div>
+    </div>
+
+    <div class="difficulty">DIFFICULTY: EASY</div>
+</div>
+
+<script>
+    let count = 0;
+    const countEl = document.getElementById("count");
+
+    function increase() {
+        count++;
+        countEl.textContent = count;
+    }
+
+    function decrease() {
+        count--;
+        countEl.textContent = count;
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Letter Counter</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #6fa8dc;
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            width: 300px;
+            height: 420px;
+            background-color: #e74c3c;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            font-size: 14px;
+            border: none;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        .count {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>LETTER<br>COUNTER</h1>
+
+        <input type="text" id="textInput" placeholder="Enter text">
+
+        <div class="count">
+            Letter Count: <span id="count">0</span>
+        </div>
+
+    </div>
+
+    <script>
+        const input = document.getElementById("textInput");
+        const count = document.getElementById("count");
+
+        input.addEventListener("input", function () {
+            count.textContent = input.value.length;
+        });
+    </script>
+
+</body>
+</html>
