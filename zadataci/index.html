@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weight Converter</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            background-color: black;
+        }
+
+        .container {
+            width: 320px;
+            margin: 100px auto;
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        input {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .results {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Weight Converter</h1>
+
+    <input type="number" id="kgInput" placeholder="Unesi tezinu u kilogramima">
+    <br>
+    <button onclick="convert()">GO</button>
+
+    <div class="results">
+        <p><strong>Pounds:</strong> <span id="pounds"></span></p>
+        <p><strong>Ounces:</strong> <span id="ounces"></span></p>
+        <p><strong>Grams:</strong> <span id="grams"></span></p>
+    </div>
+</div>
+
+<script>
+    function convert() {
+        const kg = document.getElementById("kgInput").value;
+
+        const pounds = kg * 2.20462;
+        const ounces = kg * 35.274;
+        const grams = kg * 1000;
+
+        document.getElementById("pounds").innerText = pounds.toFixed(2);
+        document.getElementById("ounces").innerText = ounces.toFixed(2);
+        document.getElementById("grams").innerText = grams.toFixed(2);
+    }
+</script>
+
+</body>
+</html>

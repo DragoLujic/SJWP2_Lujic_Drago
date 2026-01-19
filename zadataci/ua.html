@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature Converter</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .converter {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 320px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .converter h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4facfe;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #2e8cff;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .result span {
+            display: block;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="converter">
+        <h1>Temperature</h1>
+
+        <input type="number" id="celsius" placeholder="Unesi °C">
+
+        <button onclick="convertTemp()">Convert</button>
+
+        <div class="result">
+            <span id="fahrenheit">Fahrenheit: -</span>
+            <span id="kelvin">Kelvin: -</span>
+        </div>
+    </div>
+
+    <script>
+        function convertTemp() {
+            const celsius = document.getElementById("celsius").value;
+
+            if (celsius === "") {
+                alert("Unesi temperaturu u Celsiusima!");
+                return;
+            }
+
+            const fahrenheit = (celsius * 9/5) + 32;
+            const kelvin = Number(celsius) + 273.15;
+
+            document.getElementById("fahrenheit").innerText =
+                "Fahrenheit: " + fahrenheit.toFixed(2) + " °F";
+
+            document.getElementById("kelvin").innerText =
+                "Kelvin: " + kelvin.toFixed(2) + " K";
+        }
+    </script>
+
+</body>
+</html>
