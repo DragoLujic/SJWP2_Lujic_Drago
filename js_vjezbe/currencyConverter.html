@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<title>Crypto Converter</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #eaeaf5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 26px;
+        letter-spacing: 1px;
+    }
+
+
+</style>
+</head>
+<body>
+
+<div class="converter">
+    <h1>Currency converter</h1>
+
+    <select id="crypto">
+        <option value="bitcoin">Bitcoin</option>
+        <option value="ethereum">Ethereum</option>
+    </select>
+
+    <input type="number" id="amount" placeholder="Unesi iznos" />
+
+    <button onclick="convert()">Convert</button>
+
+    <div class="result" id="result">-</div>
+</div>
+
+<script>
+function convert() {
+    const crypto = document.getElementById('crypto').value;
+    const iznos = document.getElementById('amount').value;
+    
+    if (iznos <= 0) {
+        document.getElementById('result').textContent = "Unesi validan iznos";
+        return;
+    }
+
+    let cijena_za_dolare;
+    if (crypto === 'bitcoin') {
+        cijena_za_dolare = 76794;
+    } else if (crypto === 'ethereum') {
+        cijena_za_dolare = 2234;
+    }
+
+    let cijena_za_eure;
+    if (crypto === 'bitcoin') {
+        cijena_za_eure = 70750;
+    } else if (crypto === 'ethereum') {
+        cijena_za_eure = 2060;
+    }
+
+    const rezultat_za_eure = (iznos * cijena_za_eure).toFixed(2);
+    const rezultat_za_dolare = (iznos * cijena_za_dolare).toFixed(2);
+    document.getElementById('result').textContent = `Vrijednost u eurima: €${rezultat_za_eure}, u dolarima: $${rezultat_za_dolare}`;
+}
+</script>
+
+</body>
+</html>
