@@ -1,0 +1,1 @@
+Dužina: 32, Širina: 2, Površina: 64

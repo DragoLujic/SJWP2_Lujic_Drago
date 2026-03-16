@@ -1,18 +1,28 @@
 import inquirer from 'inquirer';
+import fs from 'fs';
 
 inquirer
   .prompt([{
     type: 'input',
     name: 'ime',
     message: 'Unesite vase ime:',
-  }])
+  },
+  {
+    type: "number",
+    name: "ocjena",
+    message: "Unesite vas broj ocjene:"
+  }
+
+])
   .then((answers) => {
-    // Use user feedback for... whatever!!
+    const tekst = `Ime: ${answers.ime}, Ocjena: ${answers.ocjena}\n`;
+    fs.appendFileSync('rezultati.txt', tekst);
+    console.log('Rezultati su uspješno spremljeni u rezultati.txt');
   })
   .catch((error) => {
     if (error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
+      console.error('Prompt se ne može prikazati u ovom okruženju');
     } else {
-      // Something else went wrong
+      console.error('Došlo je do greške:', error);
     }
   });
