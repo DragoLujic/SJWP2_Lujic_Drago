@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineVault</title>
+  <style>
+    :root {
+      --bg: #08111f;
+      --panel: #0f1b2e;
+      --panel-2: #14243c;
+      --line: rgba(113, 172, 255, 0.22);
+      --text: #eef4ff;
+      --muted: #9eb0cb;
+      --accent: #4ea1ff;
+      --accent-2: #2563eb;
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: radial-gradient(circle at top, rgba(37,99,235,0.15), transparent 28%), linear-gradient(180deg, #08111f 0%, #091321 100%);
+      color: var(--text);
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1240px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      font-size: 13px;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .topbar .container {
+      display: flex;
+      justify-content: flex-end;
+      gap: 18px;
+      padding: 10px 0;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(8,17,31,0.92);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 18px 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-right: auto;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      color: #dce8ff;
+      font-size: 15px;
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 250px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 0 12px;
+      height: 44px;
+    }
+
+    .search input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: white;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 28px 0 10px;
+    }
+
+    .hero-box {
+      background: linear-gradient(180deg, rgba(20,36,60,0.88), rgba(12,22,37,0.95));
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(78,161,255,0.12);
+      border: 1px solid rgba(78,161,255,0.2);
+      color: #dbeafe;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -1.4px;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 780px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .section {
+      padding: 26px 0 8px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: -0.8px;
+    }
+
+    .section-head p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #dce8ff;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #11203a 0%, #0b172b 100%);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(113,172,255,0.55);
+      box-shadow: 0 20px 32px rgba(0,0,0,0.3);
+    }
+
+    .poster {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      background: linear-gradient(135deg, #1e3a5f, #0f172a);
+      overflow: hidden;
+    }
+
+    .poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .poster .overlay {
+      position: absolute;
+      inset: auto 10px 10px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag, .score {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .card-body {
+      padding: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      line-height: 1.3;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .meta span {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 5px 8px;
+      border-radius: 999px;
+    }
+
+    .desc {
+      margin: 0;
+      color: #d7e4fa;
+      font-size: 13px;
+      line-height: 1.6;
+      min-height: 62px;
+    }
+
+    footer {
+      padding: 34px 0 50px;
+    }
+
+    footer .container {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(4,10,18,0.8);
+      backdrop-filter: blur(9px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: .22s ease;
+      z-index: 100;
+    }
+
+    .modal.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      width: min(940px, 100%);
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, #11203a, #0a162a);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.45);
+      transform: translateY(16px) scale(.98);
+      transition: .22s ease;
+    }
+
+    .modal.open .modal-box { transform: translateY(0) scale(1); }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 310px 1fr;
+    }
+
+    .modal-cover {
+      min-height: 100%;
+      background: linear-gradient(135deg,#20385d,#0c1727);
+    }
+
+    .modal-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-content {
+      padding: 26px 26px 22px;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .modal-content h3 {
+      margin: 0 52px 12px 0;
+      font-size: 32px;
+      line-height: 1.08;
+      letter-spacing: -1px;
+    }
+
+    .modal-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .modal-meta span {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .modal-content p {
+      margin: 0 0 16px;
+      color: #d7e4fa;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .info-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 14px;
+      border-radius: 16px;
+    }
+
+    .info-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .info-value {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 900px) {
+      .modal-grid { grid-template-columns: 1fr; }
+      .modal-cover { max-height: 360px; }
+    }
+
+    @media (max-width: 720px) {
+      .topbar { display: none; }
+      .nav { gap: 14px; }
+      .logo { width: 100%; }
+      .search { width: 100%; min-width: 0; }
+      .section-head { flex-direction: column; align-items: start; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .info { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .container { width: min(100% - 18px, 1240px); }
+      .grid { gap: 12px; }
+      .card-body { padding: 12px; }
+      .hero-box { padding: 22px; }
+      .modal-content h3 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy</a>
+      <a href="#">Disclaimer</a>
+    </div>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <div class="logo">cine<span>vault</span></div>
+      <nav class="links">
+        <a href="#filmovi">Filmovi</a>
+        <a href="#serije">Serije</a>
+        <a href="#dokumentarci">Dokumentarci</a>
+      </nav>
+      <label class="search">
+        <span>🔎</span>
+        <input id="searchInput" type="text" placeholder="Pretraži naslov..." />
+      </label>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-box">
+        <div class="badge">Profesionalan izgled + stvarni coveri</div>
+        <h1>Galerija filmova, serija i dokumentaraca s modernim dizajnom i modal detaljima</h1>
+        <p>
+          Napravio sam uredniju i ljepšu verziju stranice: stvarni naslovi, cover slike, bolji raspored kartica,
+          pretraga i klik na stavku koji otvara detalje unutar JavaScript modala.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="filmovi">
+      <div class="section-head">
+        <div>
+          <h2>Filmovi</h2>
+          <p>Popularni blockbuster i sci-fi naslovi.</p>
+        </div>
+        <div class="pill"><span id="countFilmovi">0</span> stavki</div>
+      </div>
+      <div class="grid" id="filmoviGrid"></div>
+    </section>
+
+    <section class="section" id="serije">
+      <div class="section-head">
+        <div>
+          <h2>Serije</h2>
+          <p>Netflix i premium TV naslovi s prepoznatljivim vizualima.</p>
+        </div>
+        <div class="pill"><span id="countSerije">0</span> stavki</div>
+      </div>
+      <div class="grid" id="serijeGrid"></div>
+    </section>
+
+    <section class="section" id="dokumentarci">
+      <div class="section-head">
+        <div>
+          <h2>Dokumentarci</h2>
+          <p>Priroda, sport i stvarne priče.</p>
+        </div>
+        <div class="pill"><span id="countDok">0</span> stavki</div>
+      </div>
+      <div class="grid" id="dokumentarciGrid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">Copyright © 2026 CineVault. Sva prava pridržana.</div>
+  </footer>
+
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <div class="modal-grid">
+        <div class="modal-cover"><img id="modalImage" src="" alt="cover"></div>
+        <div class="modal-content">
+          <button class="close" id="closeModal">×</button>
+          <h3 id="modalTitle"></h3>
+          <div class="modal-meta" id="modalMeta"></div>
+          <p id="modalDesc"></p>
+          <div class="info">
+            <div class="info-box"><div class="info-label">Glavne uloge / Tema</div><div class="info-value" id="modalCast"></div></div>
+            <div class="info-box"><div class="info-label">Autor / Redatelj</div><div class="info-value" id="modalDirector"></div></div>
+            <div class="info-box"><div class="info-label">Kategorija</div><div class="info-value" id="modalCategory"></div></div>
+            <div class="info-box"><div class="info-label">Trajanje</div><div class="info-value" id="modalRuntime"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const content = {
+      filmovi: [
+        {
+          title: 'Avengers: Endgame',
+          image: 'https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg',
+          year: '2019', genre: 'Superhero / Akcija', rating: '8.4', runtime: '181 min',
+          cast: 'Robert Downey Jr., Chris Evans, Scarlett Johansson', director: 'Anthony & Joe Russo',
+          description: 'Veliko Marvel finale koje okuplja preživjele Avengerse u posljednjem pokušaju da preokrenu događaje iz Infinity Wara.'
+        },
+        {
+          title: 'Interstellar',
+          image: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/bc/Interstellar_film_poster.jpg/500px-Interstellar_film_poster.jpg',
+          year: '2014', genre: 'Sci‑Fi / Drama', rating: '8.7', runtime: '169 min',
+          cast: 'Matthew McConaughey, Anne Hathaway, Jessica Chastain', director: 'Christopher Nolan',
+          description: 'Emotivna i vizualno moćna priča o putovanju kroz svemir u potrazi za novim domom za čovječanstvo.'
+        },
+        {
+          title: 'Inception',
+          image: 'https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg',
+          year: '2010', genre: 'Sci‑Fi / Triler', rating: '8.8', runtime: '148 min',
+          cast: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Tom Hardy', director: 'Christopher Nolan',
+          description: 'Tim ulazi u snove drugih ljudi kako bi ukrao ili usadio ideju, u filmu poznatom po vrhunskom konceptu i atmosferi.'
+        },
+        {
+          title: 'The Dark Knight',
+          image: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/1c/The_Dark_Knight_%282008_film%29.jpg/500px-The_Dark_Knight_%282008_film%29.jpg',
+          year: '2008', genre: 'Akcija / Krimi', rating: '9.0', runtime: '152 min',
+          cast: 'Christian Bale, Heath Ledger, Aaron Eckhart', director: 'Christopher Nolan',
+          description: 'Jedan od najhvaljenijih superhero filmova, s legendarnim Jokerom i mračnim vizualnim identitetom.'
+        }
+      ],
+      serije: [
+        {
+          title: 'Stranger Things',
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Stranger_Things_logo.png/1200px-Stranger_Things_logo.png',
+          year: '2016–2025', genre: 'Sci‑Fi / Mystery', rating: '8.7', runtime: '5 sezona',
+          cast: 'Millie Bobby Brown, Finn Wolfhard, David Harbour', director: 'The Duffer Brothers',
+          description: 'Nostalgična i napeta serija smještena u 80-e, gdje misteriozni nestanci i paranormalni događaji mijenjaju mali grad Hawkins.'
+        },
+        {
+          title: 'Wednesday',
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Wednesday_%28Netflix_TV_series%29_logo.svg/1200px-Wednesday_%28Netflix_TV_series%29_logo.svg.png',
+          year: '2022–', genre: 'Mystery / Gothic', rating: '8.0', runtime: '2 sezone',
+          cast: 'Jenna Ortega, Emma Myers, Catherine Zeta-Jones', director: 'Alfred Gough & Miles Millar',
+          description: 'Wednesday Addams stiže u Nevermore Academy, gdje istražuje niz ubojstava i vlastite nadnaravne sposobnosti.'
+        },
+        {
+          title: 'The Witcher',
+          image: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/05/The_Witcher_Logo.png/1200px-The_Witcher_Logo.png',
+          year: '2019–2025', genre: 'Fantasy / Drama', rating: '8.0', runtime: '4 sezone',
+          cast: 'Henry Cavill, Anya Chalotra, Freya Allan', director: 'Lauren Schmidt Hissrich',
+          description: 'Fantasy serija o Geraltu od Rivije, lovcu na čudovišta, u svijetu politike, magije i sudbine.'
+        },
+        {
+          title: 'Dark',
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Darknetflix.svg/1200px-Darknetflix.svg.png',
+          year: '2017–2020', genre: 'Sci‑Fi / Mystery', rating: '8.7', runtime: '3 sezone',
+          cast: 'Louis Hofmann, Lisa Vicari, Andreas Pietschmann', director: 'Baran bo Odar & Jantje Friese',
+          description: 'Njemačka serija puna misterije, nestanaka i vremenskih petlji, s jednim od najjačih sci‑fi zapleta u TV svijetu.'
+        }
+      ],
+      dokumentarci: [
+        {
+          title: 'Planet Earth II',
+          image: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Planet_Earth_II.png/1200px-Planet_Earth_II.png',
+          year: '2016', genre: 'Priroda', rating: '9.5', runtime: '6 epizoda',
+          cast: 'David Attenborough', director: 'BBC Natural History Unit',
+          description: 'Vrhunski prirodoslovni dokumentarac s impresivnim kadrovima i jednom od najljepših produkcija ikad viđenih na televiziji.'
+        },
+        {
+          title: 'The Last Dance',
+          image: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/14/The_Last_Dance_2020.jpg/640px-The_Last_Dance_2020.jpg',
+          year: '2020', genre: 'Sport', rating: '9.1', runtime: '10 epizoda',
+          cast: 'Michael Jordan, Scottie Pippen, Dennis Rodman', director: 'Jason Hehir',
+          description: 'Dokumentarna serija o Michaelu Jordanu i Chicago Bulls eri, prepuna arhivskih snimki i legendarnog sportskog momenta.'
+        },
+        {
+          title: 'Free Solo',
+          image: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fd/Free_Solo_poster.png/640px-Free_Solo_poster.png',
+          year: '2018', genre: 'Sport / Biografija', rating: '8.1', runtime: '100 min',
+          cast: 'Alex Honnold', director: 'Jimmy Chin & Elizabeth Chai Vasarhelyi',
+          description: 'Napeti dokumentarac o Alexu Honnoldu i njegovom povijesnom usponu na El Capitan bez ikakve zaštitne opreme.'
+        },
+        {
+          title: 'Our Planet',
+          image: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e5/Our_Planet_title_card.jpg/640px-Our_Planet_title_card.jpg',
+          year: '2019', genre: 'Priroda', rating: '9.3', runtime: '2 sezone',
+          cast: 'David Attenborough', director: 'Netflix / Silverback Films',
+          description: 'Dokumentarna serija o prirodi i klimatskim promjenama, s fantastičnim snimkama i modernom prezentacijom.'
+        }
+      ]
+    };
+
+    const grids = {
+      filmovi: document.getElementById('filmoviGrid'),
+      serije: document.getElementById('serijeGrid'),
+      dokumentarci: document.getElementById('dokumentarciGrid')
+    };
+
+    document.getElementById('countFilmovi').textContent = content.filmovi.length;
+    document.getElementById('countSerije').textContent = content.serije.length;
+    document.getElementById('countDok').textContent = content.dokumentarci.length;
+
+    function createCard(item, category) {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.dataset.title = item.title.toLowerCase();
+      card.innerHTML = `
+        <div class="poster">
+          <img src="${item.image}" alt="${item.title}">
+          <div class="overlay">
+            <span class="tag">${category}</span>
+            <span class="score">⭐ ${item.rating}</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3>${item.title}</h3>
+          <div class="meta">
+            <span>${item.year}</span>
+            <span>${item.genre}</span>
+          </div>
+          <p class="desc">${item.description}</p>
+        </div>
+      `;
+      card.addEventListener('click', () => openModal(item, category));
+      return card;
+    }
+
+    function render() {
+      content.filmovi.forEach(item => grids.filmovi.appendChild(createCard(item, 'Film')));
+      content.serije.forEach(item => grids.serije.appendChild(createCard(item, 'Serija')));
+      content.dokumentarci.forEach(item => grids.dokumentarci.appendChild(createCard(item, 'Dokumentarac')));
+    }
+
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalCast = document.getElementById('modalCast');
+    const modalDirector = document.getElementById('modalDirector');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalRuntime = document.getElementById('modalRuntime');
+
+    function openModal(item, category) {
+      modalImage.src = item.image;
+      modalImage.alt = item.title;
+      modalTitle.textContent = item.title;
+      modalMeta.innerHTML = `
+        <span>${item.year}</span>
+        <span>${item.genre}</span>
+        <span>⭐ ${item.rating}</span>
+      `;
+      modalDesc.textContent = item.description;
+      modalCast.textContent = item.cast;
+      modalDirector.textContent = item.director;
+      modalCategory.textContent = category;
+      modalRuntime.textContent = item.runtime;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const value = e.target.value.trim().toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        card.classList.toggle('hidden', !card.dataset.title.includes(value));
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>
